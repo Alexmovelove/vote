@@ -38,8 +38,8 @@ let mytable = 'a'+d;
 
 const connection = mysql.createConnection(config);
 
-let fullbase = "votebase";
-let table = "votebase";
+let fullbase = "vote";
+let table = "vote";
 
   const sql = `SELECT * FROM `+table;
     //const sql = `SELECT * FROM p0111 ORDER BY length DESC`;
@@ -59,7 +59,8 @@ let table = "votebase";
 
 
 len = accounts.length;
- for (yyy = 0; yyy < len; yyy++) 
+// for (yyy = 0; yyy < len; yyy++) 
+ for (yyy = 0; yyy < 20; yyy++) 
 
 {
       console.log('yyy');
@@ -68,9 +69,43 @@ len = accounts.length;
      // console.log(accounts[yyy]['ofme']);
    //   console.log(accounts[yyy]['ofme']);
     //  console.log(accounts[yyy]['ofme']);
-      let weight = accounts[yyy]['weight'];
+      let mv = accounts[yyy]['mv'];
+	  let weight=100;
+	        console.log('mv');
+	        console.log(mv);
+
+	  if (mv > 1000000) { weight = 10000 }
+	  else if (mv > 900000) { weight = 9500 } else if (mv > 800000) { weight = 9000 }   else if (mv > 700000) 
+		{ 
+			weight = 8500;
+		} else if (mv > 600000) 
+		{
+			weight = 8000;
+		};
+		
+	  if ((mv > 500000) && (mv < 600000)) weight = 7500;
+	  if ((mv > 400000)&& (mv < 500000)) weight = 7000;
+	  if ((mv > 300000)&& (mv < 400000)) weight = 6500;
+	  if ((mv > 200000)&& (mv < 300000)) weight = 6000;
+	  if ((mv > 100000)&& (mv < 200000)) weight = 5500;
+	  if ((mv > 90000)&& (mv < 100000)) weight = 4900;
+	  if ((mv > 80000)&& (mv < 90000)) weight = 4800;
+	  if ((mv > 70000)&& (mv < 80000)) weight = 4700;
+	  if ((mv > 60000)&& (mv < 70000)) weight = 4600;
+	  if ((mv > 50	)&& (mv < 60000)) weight = 3500;
+	  if ((mv > 40000)&& (mv < 50000)) weight = 3400;
+	  if ((mv > 30000)&& (mv < 40000)) weight = 3300;
+	  if ((mv > 20000)&& (mv < 30000)) weight = 3200;
+	  if ((mv > 10000)&& (mv < 20000)) weight = 3100;
+	  if ((mv > 9000)&& (mv < 10000)) weight = 1900;
+	  if ((mv > 5000)&& (mv < 9000)) weight = 1500;
+	  if ((mv > 1000)&& (mv < 5000)) weight = 1000;
+
+	          console.log('weight');
+	        console.log(weight);
+     // let weight = accounts[yyy]['mv'];
 	  
- if (accounts[yyy]['ofme'] === 'no')
+ //if (accounts[yyy]['ofme'] === 'no')
  {
     steem.api.getDiscussionsByAuthorBeforeDate(accounts[yyy]['account'],null, new Date().toISOString().split('.')[0],50 , function(err, result) {
      if (result)

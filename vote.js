@@ -40,7 +40,7 @@ const connection = mysql.createConnection(config);
 	var d = new Date(); // Today!
 	d.setDate(d.getDate()-num_day); // Yesterday!
 	d = d.toJSON().split("T")[0];
-	d = d.replace(/-/gi, '');
+	d = d.replace(/-/gi,d '');
 	console.log(d);   
 
 let mytable_p = 'votebasepost';
@@ -99,40 +99,22 @@ console.log(post_number);
 			}
 			let mv_coint = users[i].mv;
 			let permlink = users[i].url;
-let url = users[i].url;
-permlink = permlink.split("/")
+			let weight = users[i].weight;
+	let url = users[i].url;
+	permlink = permlink.split("/")
     //console.log(permlink[3]);
 
-permlink = permlink[3];
+	permlink = permlink[3];
 
 		//	mv_coint = mv_coint.replace(/,/gi, '.');
 
 			lastsend = users[i].lastsend;
-			
-let mypermlink = new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
+			let mypermlink = new Date().toISOString().replace(/[^a-zA-Z0-9]+/g, '').toLowerCase();
 
-//author = "alexmove";
-//permlink = "nodejs-scripts-for-steemit-witness-get-a-list-of-voters-for-a-witness";
-
-let supertext = `Hi, @`+author+`
-
-Please support our team (@alexmove.witness and @steemit-market). We ask you to vote for us as witnesses. We are developing automatic checks for the uniqueness of posts, user ratings and other scripts and activities. We are also preparing a big project - the online shop (sale for STEEM/SBD).
-
-Every day we send double cashback to those who voted for us. Your vote is very important to us!`;
-
- steem.broadcast.comment(
-    wifkey,
-    author, // Parent Author
-    permlink, // Parent Permlink
-    votey, // Author
-    mypermlink, // Permlink
-    '', // Title
-    supertext, // Body
-    { tags: ['steemjs', 'alexmovewitness'], app: 'steemjs/examples' }, // Json Metadata
-    function(err, result) {
-      console.log(err, result);
-	  
-	  				if(err) 
+  	steem.broadcast.vote(wifkey, votey, author, permlink, 1000,function(err, result) 
+			{
+				
+					  				if(err) 
 				{ 
 					console.log(err)
 				} else {
@@ -146,12 +128,7 @@ Every day we send double cashback to those who voted for us. Your vote is very i
 					//console.log(results);
 					});
 					
-			}			
-    }
-  );
-  
-  	steem.broadcast.vote(wifkey, votey, author, permlink, 1000,function(err, result) 
-			{
+			}	
 		
 			});
 			

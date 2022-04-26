@@ -39,12 +39,12 @@ let mytable = 'a'+d;
 //let fullbase = "steemit-market";
 //let fullbase = "alexmove.witness";
 //let fullbase = "вboylikegirl.wit";
-let fullbase = "stoodkev";
-let table = "stoodkev";
+let fullbase = "alexmove.witness";
+let table = "votebase";
 
 
 //let sql = "create table if not exists `"+fullbase+"`(id int primary key auto_increment, account varchar(255) UNIQUE KEY, ofme varchar(255), lastget varchar(255))";
-let sql = "create table if not exists `"+table+"`(id int primary key auto_increment, account varchar(255) UNIQUE KEY, ofme varchar(255), lastget varchar(255))";
+let sql = "create table if not exists `"+table+"`(id int primary key auto_increment, account varchar(255) UNIQUE KEY, mv int, ofme varchar(255), lastget varchar(255))";
 
 
 connection.query(sql, function(err, results) {
@@ -52,7 +52,7 @@ if(err) console.log(err);
 else console.log("Таблица создана");
 });
 
-steem.api.call('database_api.list_witness_votes',{start:[fullbase,""], limit:200, order:"by_witness_account"},function(err, result){
+steem.api.call('database_api.list_witness_votes',{start:[fullbase,""], limit:1000, order:"by_witness_account"},function(err, result){
 	
 //	console.log(err, result);
 
@@ -84,7 +84,7 @@ function replacer(key, value) {
 			 console.log(value);
 
 		  //const sql4 = "INSERT INTO `"+fullbase+"`(account, ofme, lastget) VALUES('"+value+"','yes', '"+d+"')";
-		  const sql4 = "INSERT INTO `"+table+"`(account, ofme, lastget) VALUES('"+value+"','no', '"+d+"')";
+		  const sql4 = "INSERT INTO `"+table+"`(account, mv, ofme, lastget) VALUES('"+value+"','0','no', '"+d+"')";
 		  
 		  connection.query(sql4, function(err, results) {
 			if(err) console.log(err);
