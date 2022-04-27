@@ -59,8 +59,8 @@ let table = "vote";
 
 
 len = accounts.length;
-// for (yyy = 0; yyy < len; yyy++) 
- for (yyy = 0; yyy < 20; yyy++) 
+ for (yyy = 0; yyy < len; yyy++) 
+ //for (yyy = 0; yyy < 20; yyy++) 
 
 {
       console.log('yyy');
@@ -159,16 +159,15 @@ const connection = mysql.createConnection(config);
 connection.on('error', function() {});
 
 
-let sql44 =  `create table if not exists ${table}post( id int primary key auto_increment, author varchar(255) not null, title varchar(255) not null, created varchar(255) not null, length int not null, url varchar(255) UNIQUE KEY, comments int not null, upvotes int not null, points float not null, lastsend varchar(255))`;
+let sql44 =  `create table if not exists ${table}post( id int primary key auto_increment, author varchar(255) not null, title varchar(255) not null, created varchar(255) not null, length int not null, url varchar(255) UNIQUE KEY, comments int not null, upvotes int not null, points float not null, lastsend varchar(255), weight int not null)`;
  
-          
-
+  
          connection.query(sql44, function(err, results) {
                     if(err) console.log(err);
                     console.log(results);
                     });     
 
-                    const sql = `INSERT INTO ${table}post(author, title, created, length, url, comments, upvotes, points,lastsend) VALUES('${raw.author}','${title}', '${raw.created}', '${raw.body_length}', '${raw.url}', '${raw.children}', '${upvote}','0','')`;
+                    const sql = `INSERT INTO ${table}post(author, title, created, length, url, comments, upvotes, points,lastsend,weight) VALUES('${raw.author}','${title}', '${raw.created}', '${raw.body_length}', '${raw.url}', '0', '${upvote}','0','',${weight})`;
 
                     connection.query(sql, function(err, results) {
                     if(err) console.log(err);
@@ -191,7 +190,7 @@ connection.end();
 
 });
 
-	let post_number=1;
+	let post_number=70;
 		
 	const sql8 = `UPDATE vote_number SET number='${post_number}' LIMIT 1000`;
 

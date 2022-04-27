@@ -40,10 +40,10 @@ const connection = mysql.createConnection(config);
 	var d = new Date(); // Today!
 	d.setDate(d.getDate()-num_day); // Yesterday!
 	d = d.toJSON().split("T")[0];
-	d = d.replace(/-/gi,d '');
+	d = d.replace(/-/gi,'');
 	console.log(d);   
 
-let mytable_p = 'votebasepost';
+let mytable_p = 'votepost';
 let mytable_c = 'c'+d;
 let mytable = 'a'+d;
 
@@ -78,7 +78,7 @@ console.log(post_number);
 				
    for(let i=0; i < post_number; i++)
 	{
-		if (users[i].points == "0")
+		if ((users[i].comments == "0"))
 		{
 			let author = users[i].author;
 			let lastsend = users[i].lastsend;
@@ -121,7 +121,7 @@ console.log(post_number);
 					
 	  					console.log(err, result);
 					
-					const sql12 = `UPDATE ${mytable_p} SET points="1" WHERE url='${url}'`;
+					const sql12 = `UPDATE ${mytable_p} SET comments="1" WHERE url='${url}'`;
 					
 					connection.query(sql12,	function(err, results) {
 					if(err) console.log(err);
